@@ -1,4 +1,4 @@
-var numeros = [1,2,3,4,5,6,7,8,9,10];
+/* var numeros = [1,2,3,4,5,6,7,8,9,10]; */
 
 /*
 for (let i = 0; i < numeros.length; i++) {
@@ -18,13 +18,15 @@ if(1 == 1) // Se for verdadeiro
 // Usando for e if else.
 
 
-for (let um = 1; um < numeros.length; um++) {
-   /* console.log (numeros[um]);*/
+/* for (let um = 1; um < numeros.length; um++) {
+   /* console.log (numeros[um]);
 let m5 = 5;
 if (m5 < numeros[um]) {
     console.log(numeros[um]);
 } 
-}
+} */
+
+
 
 
 
