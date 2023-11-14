@@ -16,4 +16,12 @@ export class UsuarioController {
        
         return this.usuarioServico.getUsuario();
     }
+
+    @Get(':id')
+    public getUsuarioPorid(@Param() params: any): Usuario | undefined {
+        var usuarioEncontrado = this.usuarioServico.getUsuarioPorId(params.id);
+
+        return usuarioEncontrado;
+
+    }
 }

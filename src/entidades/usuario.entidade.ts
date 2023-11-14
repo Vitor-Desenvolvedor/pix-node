@@ -5,8 +5,9 @@ export class Usuario {
     public senha: string;
     public email: string;
     
-    constructor (nome: string, email: string, senha: string){
-        this.nome = nome;
-        this.email = email
+    constructor (user: Partial<Usuario>){
+        this.nome = user?.nome ?? '';
+        this.email = user?.email ?? '';
+        this.senha = user?.senha ?? '';
     }
 }
