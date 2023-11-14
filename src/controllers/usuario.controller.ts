@@ -1,4 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
+import {response} from
 import { Usuario } from "src/entidades/usuario.entidade";
 import { UsuarioServico } from "src/servicos/usuario.servico";
 
@@ -20,6 +21,12 @@ export class UsuarioController {
     @Get(':id')
     public getUsuarioPorid(@Param() params: any): Usuario | undefined {
         var usuarioEncontrado = this.usuarioServico.getUsuarioPorId(params.id);
+
+        if(usuarioEncontrado != undefined) {
+            res.status(HttpStatus.OK)
+        } else {
+            res.status(HttpStatus.Bad)
+        }
 
         return usuarioEncontrado;
 
