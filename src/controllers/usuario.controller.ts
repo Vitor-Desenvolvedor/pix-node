@@ -19,13 +19,13 @@ export class UsuarioController {
     }
 
     @Get(':id')
-    public getUsuarioPorid(@Param() params: any): Usuario | undefined {
+    public getUsuarioPorid(@Param() params: any): res=Response {
         var usuarioEncontrado = this.usuarioServico.getUsuarioPorId(params.id);
 
         if(usuarioEncontrado != undefined) {
-            res.status(HttpStatus.OK)
+            res.status(HttpStatus.OK).json(usuarioEncontrado);
         } else {
-            res.status(HttpStatus.Bad)
+            res.status(HttpStatus.BAD_REQUEST);
         }
 
         return usuarioEncontrado;
