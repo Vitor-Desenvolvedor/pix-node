@@ -18,8 +18,16 @@ export class UsuarioController {
         return this.usuarioServico.getUsuario();
     }
 
+
+    
+    @Get('getPorNome')
+    public getPorNome(@Query('nome') nome ){
+        console.log(nome);
+    }
+
+
     @Get(':id')
-    public getUsuarioPorid(@Param() params: any): res=Response {
+    public getUsuarioPorid(@Param() params: any, @Res() res:Response) {
         var usuarioEncontrado = this.usuarioServico.getUsuarioPorId(params.id);
 
         if(usuarioEncontrado != undefined) {
@@ -31,4 +39,11 @@ export class UsuarioController {
         return usuarioEncontrado;
 
     }
+
+    catch (exception) {
+        res.status(HttpStatus.CONFLICT).json(exception);
+    }
+
+    res.send();
+
 }
