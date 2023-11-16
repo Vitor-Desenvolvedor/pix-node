@@ -7,12 +7,12 @@ export class Transacao {
     public chavePixDestino: string;
     public sucesso: boolean;
 
-    constructor(data: Date, valor: number, idUsuarioOrigem: number, idUsuarioDestino: number, chavePixDestino: string, sucesso: boolean){
+    constructor (data: Date, valor: number, idUsuarioOrigem: number, idUsuarioDestino: number, chavePixDestino: string, sucesso: boolean) {
         this.data = data;
         this.valor = valor;
-        this.idUsuarioOrigem = idUsuarioOrigem ;
-        this.idUsuarioDestino = idUsuarioDestino; 
-        this.chavePixDestino = chavePixDestino; 
+        this.idUsuarioOrigem = idUsuarioOrigem;
+        this.idUsuarioDestino = idUsuarioDestino;
+        this.chavePixDestino = chavePixDestino;
         this.sucesso = sucesso;
     }
 }

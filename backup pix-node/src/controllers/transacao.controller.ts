@@ -1,11 +1,14 @@
 import { Controller, Get } from "@nestjs/common";
 import { Transacao } from "src/entidades/transacao.entidade";
-import { TransacaoServico } from "src/servicos/transacao.servico"; 
+import { TransacaoServico } from "src/servicos/transacao.servico";
+
+
+
 
 @Controller({
     path: "transacao"
 })
-export class trasacaoController {
+export class transacaoController {
 
     constructor(private transacaoServico: TransacaoServico){
 
@@ -13,7 +16,7 @@ export class trasacaoController {
 
     @Get("listarTransacoes")
     public listarTransacoes(): Transacao[] {
-
+    
         return this.transacaoServico.getTransacao();
     }
 }

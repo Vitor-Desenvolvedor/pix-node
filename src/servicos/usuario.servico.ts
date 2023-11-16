@@ -1,40 +1,83 @@
 import { Usuario } from "src/entidades/usuario.entidade";
-import { CriarUsuarioRequest } from "src/requests/criar-usuario.request";
+import { AtualizarUsuarioRequest } from "src/requests/atualizar-usuario.request";
+import { CriarUsuarioRequest } from "src/requests/criar-usuario.requet";
 
 export class UsuarioServico {
-    getUsuarioPorId(id: number) {
-        throw new Error("Method not implemented.");
+
+    private usuariosEmMemoria: Usuario[] = [];
+
+    getUsuarios(): Usuario[] {
+        return this.usuariosEmMemoria;
     }
 
-    public getUsuario(): Usuario[]{
-        var usuarios = [
-            new Usuario({
-            
-                email: 'vl',
-                id:1
-                
-            }),
-        ];
+    getUsuarioPorId(id: number): Usuario | undefined {
 
-        return usuarios;
+        var usuario = this.getUsuarios().find(user => user.id == id);
+
+        return usuario;
+    }
+
+    getUsuarioPorNome(nome: string): Usuario | undefined {
+
+        var usuario = this.getUsuarios().find(user => this.checarNomeUsuarioContemTexto(user, nome));
+
+        return usuario;
+    }
+
+    getUsuarioPorEmail(email: string): Usuario | undefined {
+        return this.getUsuarios().find(user => this.checarEmailUsuarioEIgual(user, email));
     }
 
     public incluirUsuario(request: CriarUsuarioRequest): Usuario {
-        var usuario = new Usuario()
+        var usuarioEncontradoComEmail = this.getUsuarioPorEmail(request.email);
+
+        if(usuarioEncontradoComEmail != undefined){
+            throw "Usuario já registrado com esse email.";
+        }
+        
+        var usuario = new Usuario({
+            chavePix: request.chavePix,
+            email: request.email,
+            nome: request.nome,
+            senha: request.senha
+        });
+
+        this.getUsuarios().push(usuario);
+
+        return usuario;
     }
 
-    private checarNomeUsuario(user: Usuario, nome: string): boolean {
+    public atualizarUsuario(id: number, request: AtualizarUsuarioRequest): boolean {
+        var usuario = this.getUsuarioPorId(id);
+
+        if(usuario == undefined) return false;
+
+        usuario.atualizar(request.nome, request.chavePix);
+
+        this.salvarUsuario(usuario);
+
+        return true;
+    }
+
+    private checarNomeUsuarioContemTexto(user: Usuario, nome: string): boolean {
         var userNomeNormalizado = user.nome.toLowerCase();
         var nomeBuscaNormalizado = nome.toLowerCase();
 
-        var contemTextoNONome = userNomeNormalizado.includes(nomeBuscaNormalizado);
+        var contemTextoNoNome = userNomeNormalizado.includes(nomeBuscaNormalizado);
 
-        return contemTextoNONome;
+        return contemTextoNoNome;
     }
 
+    private checarEmailUsuarioEIgual(user: Usuario, email: string): boolean {
+        var userEmailNormalizado = user.email.toLowerCase();
+        var emailBuscaNormalizado = email.toLowerCase();
 
-    private checarEmailUsuario(user: Usuario, email: string): boolean {
-        
+        return userEmailNormalizado == emailBuscaNormalizado;
+    }
 
+    private salvarUsuario(user: Usuario){
+        var usuarioIndex = this.usuariosEmMemoria.indexOf(user);
+
+        this.usuariosEmMemoria[usuarioIndex] = user;
     }
 }

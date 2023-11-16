@@ -1,33 +1,11 @@
-/* var numeros = [1,2,3,4,5,6,7,8,9,10]; */
-
-/*
-for (let i = 0; i < numeros.length; i++) {
-    console.log("O valor de i eh:" + 1);
-    console.log(numeros[i]);
+function ehIgualQue5(numero){
+    return numero != 5;
 }
 
-if(1 == 1) // Se for verdadeiro
-{
-    console.log(true);
+var numeros = [1,2,3,4,5,6,7,8,9,10];
 
-} else { // se não
-    console.log(false);
+for(let i = 0; i < numeros.length; i++) {
+    if(ehIgualQue5(numeros[i])) {
+        console.log(numeros[i]);
+    }
 }
-*/
-// Fazer um algoritmo que imprima os números do array que são maiores que 5;
-// Usando for e if else.
-
-
-/* for (let um = 1; um < numeros.length; um++) {
-   /* console.log (numeros[um]);
-let m5 = 5;
-if (m5 < numeros[um]) {
-    console.log(numeros[um]);
-} 
-} */
-
-
-
-
-
-
